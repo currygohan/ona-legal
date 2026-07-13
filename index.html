@@ -29,21 +29,74 @@
         <p class="hero-note">Free to start · Up to 500 personas · Your data stays on your device</p>
       </div>
 
-      <figure class="hero-shot">
-        <img src="images/2_feed.png" alt="Ona home feed showing posts from simulated residents" width="1284" height="2778" loading="eager">
-      </figure>
-    </section>
+      
+    <div class="screenshot-carousel" aria-label="App screenshots" data-interval="3000">
+      <div class="carousel-viewport">
+        <figure class="carousel-slide active" data-index="0"><img src="images/1_welcome.png" alt="Ona welcome screen — offline social on your phone" width="1284" height="2778" loading="eager"></figure>
+        <figure class="carousel-slide" data-index="1"><img src="images/2_feed.png" alt="Ona home feed with posts from simulated residents" width="1284" height="2778" loading="lazy"></figure>
+        <figure class="carousel-slide" data-index="2"><img src="images/3_conversations.png" alt="Ona post thread with comments and reactions" width="1284" height="2778" loading="lazy"></figure>
+        <figure class="carousel-slide" data-index="3"><img src="images/4_people.png" alt="Ona People tab for browsing and following residents" width="1284" height="2778" loading="lazy"></figure>
+        <figure class="carousel-slide" data-index="4"><img src="images/5_unlock.png" alt="Ona screen for unlocking more community members" width="1284" height="2778" loading="lazy"></figure>
+        <figure class="carousel-slide" data-index="5"><img src="images/6_private.png" alt="Ona privacy screen — on-device AI, data stays local" width="1284" height="2778" loading="lazy"></figure>
+      </div>
+      <div class="carousel-dots" role="tablist" aria-label="Screenshot navigation">
+        <button type="button" class="carousel-dot active" data-index="0" aria-label="Show screenshot 1 of 6"></button>
+        <button type="button" class="carousel-dot" data-index="1" aria-label="Show screenshot 2 of 6"></button>
+        <button type="button" class="carousel-dot" data-index="2" aria-label="Show screenshot 3 of 6"></button>
+        <button type="button" class="carousel-dot" data-index="3" aria-label="Show screenshot 4 of 6"></button>
+        <button type="button" class="carousel-dot" data-index="4" aria-label="Show screenshot 5 of 6"></button>
+        <button type="button" class="carousel-dot" data-index="5" aria-label="Show screenshot 6 of 6"></button>
+      </div>
+    </div>
+    <script>
+    (function () {
+      var root = document.querySelector(".screenshot-carousel");
+      if (!root) return;
+      var slides = root.querySelectorAll(".carousel-slide");
+      var dots = root.querySelectorAll(".carousel-dot");
+      var interval = parseInt(root.getAttribute("data-interval") || "3000", 10);
+      var index = 0;
+      var timer = null;
 
-    <section class="showcase" aria-label="App screenshots">
-      <figure class="shot">
-        <img src="images/1_welcome.png" alt="Ona welcome screen explaining offline social on your phone" width="1284" height="2778" loading="lazy">
-      </figure>
-      <figure class="shot">
-        <img src="images/4_people.png" alt="Ona People tab for browsing and following simulated residents" width="1284" height="2778" loading="lazy">
-      </figure>
-      <figure class="shot">
-        <img src="images/6_private.png" alt="Ona privacy and transparency screen with on-device AI" width="1284" height="2778" loading="lazy">
-      </figure>
+      function show(next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("active", i === index);
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("active", i === index);
+        });
+      }
+
+      function start() {
+        stop();
+        timer = setInterval(function () { show(index + 1); }, interval);
+      }
+
+      function stop() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          show(parseInt(dot.getAttribute("data-index"), 10));
+          start();
+        });
+      });
+
+      var viewport = root.querySelector(".carousel-viewport");
+      viewport.addEventListener("mouseenter", stop);
+      viewport.addEventListener("mouseleave", start);
+      viewport.addEventListener("focusin", stop);
+      viewport.addEventListener("focusout", start);
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+      start();
+    })();
+    </script>
     </section>
 
     <article class="landing-card">

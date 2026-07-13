@@ -147,27 +147,58 @@ body.landing { background: var(--bg); }
   margin: 0;
 }
 
-.hero-shot,
-.showcase .shot {
+.screenshot-carousel {
+  width: 100%;
+  max-width: 300px;
+  margin: 1.75rem auto 1.5rem;
+}
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1284 / 2778;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+.carousel-slide {
+  position: absolute;
+  inset: 0;
   margin: 0;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
 }
-.hero-shot {
-  margin-top: 1.75rem;
+.carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
 }
-.showcase {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-.hero-shot img,
-.showcase img {
+.carousel-slide img {
   display: block;
   width: 100%;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-  border-radius: 16px;
+  height: 100%;
+  object-fit: contain;
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+}
+.carousel-dot.active { background: var(--accent); }
+.carousel-dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .landing-card { margin-bottom: 1.25rem; }
@@ -239,9 +270,20 @@ body.landing { background: var(--bg); }
 }
 .bottom-cta .cta-row { justify-content: center; }
 
-/* Desktop: multi-column grids inside cards */
+/* Desktop: hero side-by-side, multi-column grids inside cards */
 @media (min-width: 640px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr min(38%, 300px);
+    gap: 2rem;
+    align-items: center;
+  }
   .hero h1 { font-size: 2.15rem; }
+  .screenshot-carousel {
+    margin: 0;
+    max-width: 300px;
+    justify-self: center;
+  }
   .feature-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0 1.5rem;
@@ -257,4 +299,5 @@ body.landing { background: var(--bg); }
 @media (max-width: 639px) {
   .hero-copy { text-align: center; }
   .cta-row { justify-content: center; }
+  .screenshot-carousel { max-width: min(100%, 280px); }
 }
