@@ -89,11 +89,6 @@ body.landing { background: var(--bg); }
 .hero {
   margin-bottom: 1.5rem;
 }
-.hero-grid {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-}
 .hero-copy { min-width: 0; }
 .hero-badge {
   display: inline-block;
@@ -152,35 +147,28 @@ body.landing { background: var(--bg); }
   margin: 0;
 }
 
-.phone-mock {
-  justify-self: center;
+.hero-shot,
+.showcase .shot {
+  margin: 0;
+}
+.hero-shot {
+  margin-top: 1.75rem;
+}
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.hero-shot img,
+.showcase img {
+  display: block;
   width: 100%;
-  max-width: 260px;
-  padding: 0.85rem;
-  border-radius: 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-}
-.phone-screen {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 16px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 1rem 0.85rem 1.15rem;
-  text-align: left;
 }
-.mock-header {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-}
-.mock-post {
-  padding: 0.65rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.mock-post:last-child { border-bottom: none; padding-bottom: 0; }
-.mock-name { font-size: 0.78rem; font-weight: 700; margin-bottom: 0.15rem; }
-.mock-text { font-size: 0.76rem; color: var(--muted); line-height: 1.4; margin: 0; }
 
 .landing-card { margin-bottom: 1.25rem; }
 .landing-card .intro {
@@ -251,17 +239,9 @@ body.landing { background: var(--bg); }
 }
 .bottom-cta .cta-row { justify-content: center; }
 
-/* Desktop: side-by-side hero, multi-column grids */
+/* Desktop: multi-column grids inside cards */
 @media (min-width: 640px) {
   .hero h1 { font-size: 2.15rem; }
-  .hero-grid {
-    grid-template-columns: 1fr 240px;
-    gap: 2.5rem;
-  }
-  .phone-mock {
-    justify-self: end;
-    max-width: 240px;
-  }
   .feature-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0 1.5rem;
@@ -275,6 +255,6 @@ body.landing { background: var(--bg); }
 }
 
 @media (max-width: 639px) {
-  .hero-grid { text-align: center; }
+  .hero-copy { text-align: center; }
   .cta-row { justify-content: center; }
 }
